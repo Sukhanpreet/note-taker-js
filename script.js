@@ -8,6 +8,8 @@ let notesArea=document.getElementById('notes');
 
 add_button.addEventListener('click',addTask);
 
+
+// add task 
 function addTask(){
     if(note.value!==""){
         count +=1;
@@ -26,19 +28,30 @@ function addTask(){
         noteHeading.innerText="Note "+count;
         noteText.innerText=note.value;
         
+        
+
+        // view more button
         Object.assign(viewMoreButton,{
             type:'button',
             value:'View More'
         });
 
+        viewMoreButton.setAttribute('class','blue-button');
+
+        // delete button
         Object.assign(deleteButton,{
             type:'button',
             id: 'delete-button',
             value: '🗙'
         });
 
+        
+
+
         viewMoreButton.addEventListener('click',showModel);
+        
         deleteButton.addEventListener('click',deleteNote);
+
 
         newDiv.append(noteHeading);
         newDiv.append(noteText);
@@ -54,25 +67,27 @@ function addTask(){
 
 }
 
-let modelContainer=document.querySelector('.model-container');
+
+
+// view container
+let viewContainer=document.querySelector('.view-container');
+let view=viewContainer.querySelector('p');
 
 function showModel(){
    
-    modelContainer.setAttribute('style','display:block;');
+    viewContainer.setAttribute('style','display:block;');
 
-    let model=modelContainer.querySelector('p');
-
-    model.innerText=this.previousElementSibling.innerText;
+    view.innerText=this.parentElement.querySelector('p').innerText;
     
-    let closeButton=modelContainer.querySelector('input');
+    let closeButton=viewContainer.querySelector('input');
 
     closeButton.addEventListener('click', function(){
-        modelContainer.setAttribute('style','display:none;');
+        viewContainer.setAttribute('style','display:none;');
     });
 
     window.addEventListener('click',function(e){
-        if(e.target === modelContainer){
-            modelContainer.setAttribute('style','display:none;');
+        if(e.target === viewContainer){
+            viewContainer.setAttribute('style','display:none;');
         }
     });
 
