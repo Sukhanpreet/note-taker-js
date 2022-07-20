@@ -34,7 +34,7 @@ function addTask(){
         Object.assign(deleteButton,{
             type:'button',
             id: 'delete-button',
-            value: 'x'
+            value: '🗙'
         });
 
         viewMoreButton.addEventListener('click',showModel);
