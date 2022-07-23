@@ -7,7 +7,7 @@
 }
 
 body {
-    /* width: 100vw; */
+    width: 100vw;
     height: 100vh;
     background: rgb(220, 227, 234) url(img/bg.jpg) right bottom/cover no-repeat fixed;
 }
@@ -20,22 +20,14 @@ body {
     margin: auto;
 }
 
-header {
-    text-align: center;
-}
-
 header>h1 {
+    text-align: center;
     font-size: 2.7rem;
     padding-top: 20px;
 }
 
-header>p {
-    font-size: 1.4rem;
-    padding: 10px;
-}
-
 main {
-    padding: 20px;
+    padding: 30px;
     font-size: 1.2rem;
 }
 
@@ -44,13 +36,16 @@ form>div {
     align-items: center;
 }
 
+form label {
+    font-size: 1.2rem;
+}
+
 textarea {
     width: 100%;
     height: 80px;
     margin: 10px;
     padding: 8px;
     background-color: rgba(255, 255, 255, 0.881);
-
     border: none;
     border-radius: 8px;
     box-shadow: 0px 0px 5px;
@@ -62,31 +57,28 @@ input[type='submit'] {
     margin: 10px auto 30px;
     padding: 10px;
     cursor: pointer;
-
     background-color: rgb(0, 134, 0);
     color: white;
     font-size: 1.1rem;
     border: none;
     border-radius: 8px;
-    box-shadow: 0px 0px 5px green;
+    box-shadow: 0px 0px 5px rgb(0, 128, 0);
     transition: all 0.5s;
 }
 
 input[type='submit']:hover {
     background-color: rgb(0, 185, 0);
+    transform: scale(1.1);
 }
 
-
 /* notes style */
-
 .note-content {
     background-color: rgba(255, 255, 255, 0.9);
     padding: 20px;
     margin-bottom: 20px;
     border-radius: 10px;
     box-shadow: 0px 0px 2px;
-    transition: 0.5s;
-
+    transition: all 0.5s;
     position: relative;
 }
 
@@ -116,12 +108,12 @@ input[type='submit']:hover {
 
 /* buttons */
 .blue-button {
+    cursor: pointer;
     background-color: rgb(24, 107, 202);
     color: white;
     font-size: 0.8rem;
     padding: 8px;
-
-    cursor: pointer;
+    margin-right: 10px;
     border: none;
     border-radius: 5px;
     box-shadow: 0px 0px 5px rgb(20, 77, 143);
@@ -130,59 +122,83 @@ input[type='submit']:hover {
 
 .blue-button:hover {
     background-color: rgb(48, 145, 255);
+    transform: scale(1.1);
 }
 
-#delete-button {
+#delete-button,
+#edit-button {
+    width: 18px;
+    height: 18px;
     background: rgb(255, 255, 255);
     color: black;
     border: none;
-    width: 18px;
-    height: 18px;
-    /* border-radius: 50%; */
     box-shadow: 0px 0px 3px red;
-    /* padding: 3px; */
     font-size: 10px;
     line-height: 10px;
-
-    transition: all 100ms ease-in 100ms;
-
     position: absolute;
     top: 8px;
     right: 8px;
+    transition: all 100ms ease-in 100ms;
 }
 
 #delete-button:hover {
     transform: scale(1.2);
-    background: rgb(226, 60, 60);
-    color: white;
+    background: rgb(223, 81, 81);
     box-shadow: 0px 0px 4px 1px red;
 }
 
+#edit-button {
+    cursor: pointer;
+    box-shadow: 0px 0px 3px blue;
+    position: absolute;
+    top: 8px;
+    right: 38px;
+}
 
+#edit-button:hover {
+    transform: scale(1.2);
+    box-shadow: 0px 0px 4px 1px blue;
+    background-color: rgb(24, 107, 202);
+}
 
 /* model */
-.view-container {
+.view-container,
+.edit-container {
     display: none;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     position: fixed;
     top: 0;
     left: 0;
-    background-color: rgba(128, 128, 128, 0.205);
+    background-color: rgba(128, 128, 128, 0.526);
 }
 
-.view {
+.view,
+.edit-area {
     background-color: rgba(255, 255, 255, 0.905);
-    width: 320px;
-    /* max-width: 800px; */
+    width: 300px;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    padding: 30px;
-
+    padding: 25px;
     border-radius: 10px;
     box-shadow: 0px 0px 5px;
+
+    animation-name: model-animation;
+    animation-duration: .4s;
+}
+
+@keyframes model-animation {
+    from {
+        top: -200px;
+        opacity: 0;
+    }
+
+    to {
+        top: 50%;
+        opacity: 1;
+    }
 }
 
 .view>p {
@@ -190,7 +206,10 @@ input[type='submit']:hover {
     overflow: auto;
 }
 
-
+#editNote {
+    height: 100px;
+    margin: 15px auto;
+}
 
 @media (min-width:768px) {
     body {
@@ -198,18 +217,11 @@ input[type='submit']:hover {
     }
 
     .container {
-        width: 60%;
+        width: 700px;
     }
 
-    .view {
+    .view,
+    .edit-area {
         min-width: 500px;
     }
-}
-
-@media (min-width:900px) {
-
-    .view {
-        min-width: 750px;
-    }
-
 }
